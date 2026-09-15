@@ -19,6 +19,20 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: StopwatchViewModel by viewModels()
 
+    override fun onStart() {
+        super.onStart()
+        if (viewModel.isRunning) {
+            startTimerUpdates()
+        } else {
+            updateTimerText()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stopTimerUpdates()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -104,5 +118,7 @@ class MainActivity : AppCompatActivity() {
             stopTimerUpdates()
             updateTimerText()
         }
+
+
     }
 }

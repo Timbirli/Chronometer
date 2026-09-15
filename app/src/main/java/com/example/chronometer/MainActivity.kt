@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         btnPause = findViewById(R.id.btnPause)
         btnReset = findViewById(R.id.btnReset)
 
+        setupButtons()
     }
 
     // Форматирование из миллисекунд в строковый формат
@@ -73,5 +74,35 @@ class MainActivity : AppCompatActivity() {
 
     private fun stopTimerUpdates() {
         handler.removeCallbacks(updateRunnable)
+    }
+
+    private fun setupButtons() {
+        // Start
+        btnStart.setOnClickListener {
+            if (!viewModel.isRunning) {
+                viewModel.startTime = android.os.SystemClock.elapsedRealtime()
+                viewModel.isRunning = true
+                startTimerUpdates()
+            }
+        }
+
+        // Pause
+        btnPause.setOnClickListener {
+            if (viewModel.isRunning) {
+                viewModel.elapsedTime += android.os.SystemClock.elapsedRealtime() - viewModel.startTime
+                viewModel.isRunning = false
+                stopTimerUpdates()
+                updateTimerText()
+            }
+        }
+
+        // Reset
+        btnReset.setOnClickListener {
+            viewModel.isRunning = false
+            viewModel.startTime = 0L
+            viewModel.elapsedTime = 0L
+            stopTimerUpdates()
+            updateTimerText()
+        }
     }
 }

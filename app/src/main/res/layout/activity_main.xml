@@ -7,6 +7,58 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FAFAFA"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="32dp">
+
+        <!-- Надпись с прошедшим временем -->
+        <TextView
+            android:id="@+id/tvTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:text="00:00"
+            android:textColor="#000000"
+            android:textSize="72sp" />
+
+        <!-- Кнопка Start -->
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#555555"
+            android:text="START"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <!-- Кнопка Pause -->
+        <Button
+            android:id="@+id/btnPause"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#555555"
+            android:text="PAUSE"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <!-- Кнопка Reset -->
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#555555"
+            android:text="RESET"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

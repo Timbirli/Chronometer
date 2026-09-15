@@ -42,4 +42,36 @@ class MainActivity : AppCompatActivity() {
             String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds)
         }
     }
+
+    // Handler для обновления
+    private val handler = android.os.Handler(android.os.Looper.getMainLooper())
+
+    private val updateRunnable = object : Runnable {
+        override fun run() {
+            updateTimerText()
+            handler.postDelayed(this, 1000) // Повторить через 1 секунду
+        }
+    }
+
+    private fun getCurrentElapsedTime(): Long {
+        return if (viewModel.isRunning) {
+            viewModel.elapsedTime + (android.os.SystemClock.elapsedRealtime() - viewModel.startTime)
+        } else {
+            viewModel.elapsedTime
+        }
+    }
+
+    private fun updateTimerText() {
+        val elapsedMillis = getCurrentElapsedTime()
+        tvTimer.text = formatTime(elapsedMillis)
+    }
+
+    private fun startTimerUpdates() {
+        handler.removeCallbacks(updateRunnable)
+        handler.post(updateRunnable)
+    }
+
+    private fun stopTimerUpdates() {
+        handler.removeCallbacks(updateRunnable)
+    }
 }
